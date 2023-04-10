@@ -39,15 +39,15 @@ g) Mean Squared Error
 ## Results
 Results are averaged across two test data workouts and given for end-to-end simulation, in which errors committed by previous steps trickle down to the succeeding steps. Results were produced by the models given in the 'models' directory, which were trained in the training files.
 <br/>
-Segment Miscount Rate: 11.6 %
-Mean Position Error: 4.75 s 
-Classification Accuracy (Segmentation): 100 %
+Segment Miscount Rate: 11.6 %<br/>
+Mean Position Error: 4.75 s<br/>
+Classification Accuracy (Segmentation): 100 %<br/>
 <br/>
-Recognition Accuracy (Recognition): 88.24 %
+Recognition Accuracy (Recognition): 88.24 %<br/>
 <br/>
-Percentage within +-0/+-1/+-2: 29.71/69.22/77.36
-Mean Absolute Error: 1.35 
-Mean Squared Error: 3.36
+Percentage within +-0/+-1/+-2: 29.71/69.22/77.36<br/>
+Mean Absolute Error: 1.35<br/>
+Mean Squared Error: 3.36<br/>
 
 ## Package Versions
 python---3.7.6<br/>
