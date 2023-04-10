@@ -10,54 +10,54 @@ MM-Fit dataset: https://mmfit.github.io/<br/>
 RecoFit dataset: https://msropendata.com/datasets/799c1167-2c8f-44c4-929c-227bf04e2b9a
 
 ## Assessment Methods
-**Segmentation quality is assessed based on three measures:** 
-
+Segmentation quality is assessed based on three measures: 
+<br/>
 a) Segment Miscount Rate:
 Percentage of deviation of predicted segment count from true segment count.
-
+<br/>
 b) Mean Position Error: 
 Mean difference in seconds of start and end of predicted segment w.r.t. start and end of the corresponding true segment.
-
+<br/>
 c) Classification Accuracy (Segmentation): 
 Percentage of correctly classified segments among all predicted segments.
-
-
+<br/>
+<br/>
 Exercise recognition quality is assessed based on:
-
+<br/>
 d) Classification Accuracy (Recognition): 
 Percentage of correctly classified exercise segments among all classified exercise segments.
-
+<br/>
+<br/>
 Repetition counting quality is assessed based on three measures:
-
+<br/>
 e) Percentage of predicted counts within +-0, +-1 and +-2 repetitions of the corresponding true repetition count.
-
+<br/>
 f) Mean Absolute Error
-
+<br/>
 g) Mean Squared Error
+
 ## Results
 Results are averaged across two test data workouts and given for end-to-end simulation, in which errors committed by previous steps trickle down to the succeeding steps. Results were produced by the models given in the 'models' directory, which were trained in the training files.
-
+<br/>
 Segment Miscount Rate: 11.6 %
-
 Mean Position Error: 4.75 s 
-
 Classification Accuracy (Segmentation): 100 %
-
+<br/>
 Recognition Accuracy (Recognition): 88.24 %
-
+<br/>
 Percentage within +-0/+-1/+-2: 29.71/69.22/77.36
-
 Mean Absolute Error: 1.35 
-
 Mean Squared Error: 3.36
+
 ## Package Versions
-python---3.7.6  
-matplotlib---3.1.3  
-numpy---1.21.6    
-pandas---1.0.1   
-scipy---1.4.1   
-sklearn---0.22.1    
-tensorflow---2.9.1
+python---3.7.6<br/>
+matplotlib---3.1.3<br/> 
+numpy---1.21.6<br/>  
+pandas---1.0.1<br/>  
+scipy---1.4.1<br/>  
+sklearn---0.22.1<br/>  
+tensorflow---2.9.1<br/>
+
 ## Copyright Notice
 No license is offered. Copyrights belong to the owner of this repository.
 The software provider does not represent or warrant that it has any rights whatsoever in the data used.
