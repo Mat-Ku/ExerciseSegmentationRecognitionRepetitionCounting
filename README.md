@@ -37,8 +37,7 @@ f) Mean Absolute Error
 g) Mean Squared Error
 
 ## Results
-Results are averaged across two test data workouts and given for end-to-end simulation, in which errors committed by previous steps trickle down to the succeeding steps. Results were produced by the models given in the 'models' directory, which were trained in the training files.
-<br/>
+Results are averaged across two test data workouts and given for end-to-end simulation, in which errors committed by previous steps trickle down to the succeeding steps. Results were produced by the models given in the 'models' directory, which were trained in the training files.<br/>
 Segment Miscount Rate: 11.6 %<br/>
 Mean Position Error: 4.75 s<br/>
 Classification Accuracy (Segmentation): 100 %<br/>
@@ -51,11 +50,11 @@ Mean Squared Error: 3.36<br/>
 
 ## Package Versions
 python---3.7.6<br/>
-matplotlib---3.1.3<br/> 
-numpy---1.21.6<br/>  
-pandas---1.0.1<br/>  
-scipy---1.4.1<br/>  
-sklearn---0.22.1<br/>  
+matplotlib---3.1.3<br/>
+numpy---1.21.6<br/>
+pandas---1.0.1<br/>
+scipy---1.4.1<br/>
+sklearn---0.22.1<br/>
 tensorflow---2.9.1<br/>
 
 ## Copyright Notice
