@@ -54,7 +54,7 @@ python---3.7.6<br/>
 matplotlib---3.1.3<br/>
 numpy---1.21.6<br/>
 pandas---1.0.1<br/>
-scipy---1.4.1<br/>
+scipy---1.1.0<br/>
 sklearn---0.22.1<br/>
 tensorflow---2.9.1<br/>
 
