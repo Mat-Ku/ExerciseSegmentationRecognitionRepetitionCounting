@@ -21,13 +21,13 @@ Percentage of deviation of predicted segment count from true segment count.
 b) Mean Position Error: 
 Mean difference in seconds of start and end of predicted segment w.r.t. start and end of the corresponding true segment.
 <br/>
-c) Classification Accuracy (Segmentation): 
+c) Classification Accuracy: 
 Percentage of correctly classified segments among all predicted segments.
 <br/>
 <br/>
 Exercise recognition quality is assessed based on:
 <br/>
-d) Classification Accuracy (Recognition): 
+d) Recognition Accuracy: 
 Percentage of correctly classified exercise segments among all classified exercise segments.
 <br/>
 <br/>
