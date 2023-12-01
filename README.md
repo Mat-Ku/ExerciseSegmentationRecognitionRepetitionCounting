@@ -6,7 +6,7 @@ A fully convolutional neural network-based end-to-end workflow for segmentation,
 The project displays a three-step approach. The first step, being segmentation, slides a window across the workout data and uses a CNN for classifying each window segment as either 'rest' or 'exercise'. The second step uses a CNN for recognizing the exercise type performed inside each of the determined exercise segments. There are 10 different exercise types (e.g. 'squats', 'pushups' etc.). The third step counts the number of performed repetitions inside each determined exercise segment by using a CNN for regression.
 
 ## Workflow
-![text](workflow.png "Workflow")
+![image](workflow.png "Workflow")
 
 ## Data
 MM-Fit dataset: https://mmfit.github.io/<br/>
@@ -42,8 +42,9 @@ g) Mean Squared Error
 ## Results
 Results are averaged across two test data workouts and given for end-to-end simulation, in which errors committed by previous steps trickle down to the succeeding steps. Results were produced by the models given in the 'models' directory, which were trained in the training files.<br/>
 <br/>
-# Segmentation
-![text](images/segmentation_results.png "segmentation_results")
+### Segmentation
+![image](images/segmentation_results.png "segmentation_results")
+
 a) Segment Miscount Rate: 11.6 %<br/>
 b) Mean Position Error: 4.75 s<br/>
 c) Classification Accuracy (Segmentation): 100 %<br/>
