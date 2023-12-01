@@ -47,12 +47,14 @@ Results are averaged across two test data workouts and given for end-to-end simu
 
 a) Segment Miscount Rate: 11.6 %<br/>
 b) Mean Position Error: 4.75 s<br/>
-c) Classification Accuracy (Segmentation): 100 %<br/>
+c) Classification Accuracy: 100 %<br/>
 <br/>
 ### Exercise Recognition
 ![image](images/recognition_results.png "recognition_results")
 
-d) Recognition Accuracy (Recognition): 88.24 %<br/>
+d) Recognition Accuracy: 93.93 %<br/>
+Since the segmentation step predicted two too many exercise segments for workout w17, those two segments are treated as false predictions. Therefore, the exercise recognition
+accuracy for workout w17 is not 96.88%, but 91.18% instead. With the exercise segment count of workout w06 having been predicted correctly, and therefore not causing any penalty, the recognition accuracy given above is the average of the recognition accuracy of workout w06 (96.67%) and the corrected recognition accuracy of workout w17 (91.18%).
 <br/>
 ### Repetition Counting
 | Within +-0 repetitions | Within +-1 repetitions | Within +-2 repetitions | Mean Absolute Error | Mean Squared Error |
