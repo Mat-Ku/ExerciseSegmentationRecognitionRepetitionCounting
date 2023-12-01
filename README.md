@@ -57,10 +57,7 @@ d) Recognition Accuracy (Recognition): 88.24 %<br/>
 ### Repetition Counting
 | Within +-0 repetitions | Within +-1 repetitions | Within +-2 repetitions | Mean Absolute Error | Mean Squared Error |
 | ---------------------- | ---------------------- | ---------------------- | ------------------- | ------------------ |
-| 29.71 %                | 69.22 %                | 77.36 %                | 1.35                | 3.36               |
-e) Percentage within +-0/+-1/+-2: 29.71/69.22/77.36<br/>
-f) Mean Absolute Error: 1.35<br/>
-g) Mean Squared Error: 3.36<br/>
+|        29.71 %         |        69.22 %         |         77.36 %        |         1.35        |        3.36        |
 
 ## Package Versions
 python---3.7.6<br/>
