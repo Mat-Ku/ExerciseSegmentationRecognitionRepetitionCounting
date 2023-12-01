@@ -49,6 +49,9 @@ a) Segment Miscount Rate: 11.6 %<br/>
 b) Mean Position Error: 4.75 s<br/>
 c) Classification Accuracy (Segmentation): 100 %<br/>
 <br/>
+### Exercise Recognition
+![image](images/recognition_results.png "recognition_results")
+
 d) Recognition Accuracy (Recognition): 88.24 %<br/>
 <br/>
 e) Percentage within +-0/+-1/+-2: 29.71/69.22/77.36<br/>
