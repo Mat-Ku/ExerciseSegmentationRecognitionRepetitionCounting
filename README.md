@@ -49,6 +49,7 @@ Results are averaged across two test data workouts and given for end-to-end simu
 | --------------------- | ------------------- | ----------------------- |
 | 11.60 %               | 4.75 s              | 100.00 %                |
 <br/>
+
 ### Exercise Recognition
 ![image](images/recognition_results.png "recognition_results")
 
