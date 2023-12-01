@@ -68,13 +68,13 @@ accuracy for workout w17 is not 96.88%, but 91.18% instead. With the exercise se
 |        29.71 %         |        69.22 %         |         77.36 %        |         1.35        |        3.36        |
 
 ## Package Versions
-python---3.7.6<br/>
-matplotlib---3.1.3<br/>
-numpy---1.21.6<br/>
-pandas---1.0.1<br/>
-scipy---1.1.0<br/>
-sklearn---0.22.1<br/>
-tensorflow---2.9.1<br/>
+python==3.7.6<br/>
+matplotlib==3.1.3<br/>
+numpy==1.21.6<br/>
+pandas==1.0.1<br/>
+scipy==1.1.0<br/>
+sklearn==0.22.1<br/>
+tensorflow==2.9.1<br/>
 
 ## Copyright Notice
 The software provider does not represent or warrant that it has any rights whatsoever in the data used.
