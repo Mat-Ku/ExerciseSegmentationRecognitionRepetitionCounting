@@ -61,6 +61,7 @@ accuracy for workout w17 is not 96.88%, but 91.18% instead. With the exercise se
 <br/>
 
 ### Repetition Counting
+
 | Within +-0 repetitions | Within +-1 repetitions | Within +-2 repetitions | Mean Absolute Error | Mean Squared Error |
 | ---------------------- | ---------------------- | ---------------------- | ------------------- | ------------------ |
 |        29.71 %         |        69.22 %         |         77.36 %        |         1.35        |        3.36        |
