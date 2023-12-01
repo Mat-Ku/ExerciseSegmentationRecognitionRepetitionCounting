@@ -42,6 +42,8 @@ g) Mean Squared Error
 ## Results
 Results are averaged across two test data workouts and given for end-to-end simulation, in which errors committed by previous steps trickle down to the succeeding steps. Results were produced by the models given in the 'models' directory, which were trained in the training files.<br/>
 <br/>
+# Segmentation
+!(images/segmentation_results.png "segmentation_results")
 a) Segment Miscount Rate: 11.6 %<br/>
 b) Mean Position Error: 4.75 s<br/>
 c) Classification Accuracy (Segmentation): 100 %<br/>
