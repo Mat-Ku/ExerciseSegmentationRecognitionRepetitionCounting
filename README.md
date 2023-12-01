@@ -54,6 +54,10 @@ c) Classification Accuracy (Segmentation): 100 %<br/>
 
 d) Recognition Accuracy (Recognition): 88.24 %<br/>
 <br/>
+### Repetition Counting
+| Within +-0 repetitions | Within +-1 repetitions | Within +-2 repetitions | Mean Absolute Error | Mean Squared Error |
+| ---------------------- | ---------------------- | ---------------------- | ------------------- | ------------------ |
+| 29.71 %                | 69.22 %                | 77.36 %                | 1.35                | 3.36               |
 e) Percentage within +-0/+-1/+-2: 29.71/69.22/77.36<br/>
 f) Mean Absolute Error: 1.35<br/>
 g) Mean Squared Error: 3.36<br/>
@@ -68,6 +72,5 @@ sklearn---0.22.1<br/>
 tensorflow---2.9.1<br/>
 
 ## Copyright Notice
-No license is offered. Copyrights belong to the owner of this repository.
 The software provider does not represent or warrant that it has any rights whatsoever in the data used.
 Neither the software provider, nor any upstream software or data provider shall have any liability for any direct, indirect, incidental, special, exemplary, or consequential damages (including without limitation lost profits), however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the software, the data used or the produced results, even if advised of the possibility of such damages.
