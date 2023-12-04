@@ -4,7 +4,7 @@ import tensorflow as tf
 from utils.assessment import Assessment
 from utils.plotting import Plotting
 from utils.processing import Processing
-from utils.data_loading import DataLoading
+from utils.data_loading import MMFitDataLoading
 from configuration import Configuration
 
 
@@ -12,8 +12,8 @@ from configuration import Configuration
 
 # Load accelerometer and gyroscope data of left smartwatch, as well as frames, week index, activity and exercise
 data_path = Configuration.Constants.MMFIT_DATA_PATH  # path to MM-Fit dataset
-train_weeks = DataLoading.load_data(data_path, Configuration.Constants.TRAINING_WEEK_IDS)
-val_weeks = DataLoading.load_data(data_path, Configuration.Constants.VALIDATION_WEEK_IDS)
+train_weeks = MMFitDataLoading.load_data(data_path, Configuration.Constants.TRAINING_WEEK_IDS)
+val_weeks = MMFitDataLoading.load_data(data_path, Configuration.Constants.VALIDATION_WEEK_IDS)
 
 # Standardize data
 train_weeks_scaled = Processing.standardize(train_weeks)

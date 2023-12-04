@@ -37,9 +37,9 @@ class Processing:
             for workout in data:
                 df = pd.DataFrame(data=list(zip(workout[0][:, 0], workout[0][:, 1], workout[0][:, 2],
                                                 workout[0][:, 3], workout[0][:, 4], workout[0][:, 5],
-                                                workout[1], workout[3], workout[4])),
-                                  columns=['x_acc', 'y_acc', 'z_acc', 'x_gyr', 'y_gyr', 'z_gyr', 'frame', 'activity',
-                                           'exercise'])
+                                                workout[1], workout[2], workout[3], workout[4])),
+                                  columns=['x_acc', 'y_acc', 'z_acc', 'x_gyr', 'y_gyr', 'z_gyr', 'week',
+                                           'activity', 'exercise', 'frame'])
                 weeks_scaled.append(df)
 
             return weeks_scaled
@@ -57,10 +57,9 @@ class Processing:
                 acc_gyr_scaled = scaler.transform(data[ind][0])
                 df = pd.DataFrame(data=list(zip(acc_gyr_scaled[:, 0], acc_gyr_scaled[:, 1], acc_gyr_scaled[:, 2],
                                                 acc_gyr_scaled[:, 3], acc_gyr_scaled[:, 4], acc_gyr_scaled[:, 5],
-                                                data[ind][1], data[ind][2], data[ind][3],
-                                                data[ind][4])),
-                                  columns=['x_acc', 'y_acc', 'z_acc', 'x_gyr', 'y_gyr', 'z_gyr', 'frame', 'week',
-                                           'activity', 'exercise'])
+                                                data[ind][1], data[ind][2], data[ind][3], data[ind][4])),
+                                  columns=['x_acc', 'y_acc', 'z_acc', 'x_gyr', 'y_gyr', 'z_gyr', 'week',
+                                           'activity', 'exercise', 'frame'])
                 weeks_scaled.append(df)
 
             return weeks_scaled

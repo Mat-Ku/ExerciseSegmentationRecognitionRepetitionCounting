@@ -10,7 +10,7 @@ import tensorflow as tf
 import warnings
 
 from configuration import Configuration
-from utils.data_loading import DataLoading
+from utils.data_loading import MMFitDataLoading, RecoFitDataLoading
 from utils.plotting import Plotting
 from utils.processing import Processing
 
@@ -22,8 +22,10 @@ recofit_path = Configuration.Constants.RECOFIT_DATA_PATH  # path to RecoFit data
 
 # Load MM-Fit data
 # Extract accelerometer and gyroscope data of left smartwatch, as well as frames, week index, activity and exercise.
-train_weeks = DataLoading.load_data(mmfit_path, Configuration.Constants.TRAINING_WEEK_IDS)
-val_weeks = DataLoading.load_data(mmfit_path, Configuration.Constants.VALIDATION_WEEK_IDS)
+train_weeks = MMFitDataLoading.load_data(mmfit_path, Configuration.Constants.TRAINING_WEEK_IDS)
+val_weeks = MMFitDataLoading.load_data(mmfit_path, Configuration.Constants.VALIDATION_WEEK_IDS)
+
+
 
 # Load Recofit data
 # loading file 'exercise_data.50.0000_singleonly.mat' is sufficient
@@ -34,7 +36,7 @@ train_weeks_dfs = []
 for ind in range(len(train_weeks)):
     df = pd.DataFrame(data=list(zip(train_weeks[ind][0][:, 0], train_weeks[ind][0][:, 1], train_weeks[ind][0][:, 2],
                                     train_weeks[ind][0][:, 3], train_weeks[ind][0][:, 4], train_weeks[ind][0][:, 5],
-                                    train_weeks[ind][4])),
+                                    train_weeks[ind][3])),
                       columns=['x_acc', 'y_acc', 'z_acc', 'x_gyr', 'y_gyr', 'z_gyr', 'exercise'])
     train_weeks_dfs.append(df)
     
@@ -42,7 +44,7 @@ val_weeks_dfs = []
 for ind in range(len(val_weeks)):
     df = pd.DataFrame(data=list(zip(val_weeks[ind][0][:, 0], val_weeks[ind][0][:, 1], val_weeks[ind][0][:, 2],
                                     val_weeks[ind][0][:, 3], val_weeks[ind][0][:, 4], val_weeks[ind][0][:, 5],
-                                    val_weeks[ind][4])),
+                                    val_weeks[ind][3])),
                       columns=['x_acc', 'y_acc', 'z_acc', 'x_gyr', 'y_gyr', 'z_gyr', 'exercise'])
     val_weeks_dfs.append(df)
 
@@ -192,8 +194,8 @@ val_data_rf = [scaler.transform(segment) for segment in val_data_rf]
 
 # Retrieve MM-Fit labels
 # Extract repetition count labels for training data from MMFit dataset
-train_labels_mf = DataLoading.load_repetition_counts(mmfit_path, Configuration.Constants.TRAINING_WEEK_IDS)
-val_labels_mf = DataLoading.load_repetition_counts(mmfit_path, Configuration.Constants.VALIDATION_WEEK_IDS)
+train_labels_mf = MMFitDataLoading.load_repetition_counts(mmfit_path, Configuration.Constants.TRAINING_WEEK_IDS)
+val_labels_mf = MMFitDataLoading.load_repetition_counts(mmfit_path, Configuration.Constants.VALIDATION_WEEK_IDS)
 
 # Savitzky-Golay-Filtering for MM-Fit data
 

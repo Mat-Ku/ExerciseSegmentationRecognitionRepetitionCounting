@@ -8,15 +8,15 @@ from utils.processing import Processing
 from utils.plotting import Plotting
 from tensorflow import keras
 from sklearn.preprocessing import LabelEncoder
-from utils.data_loading import DataLoading
+from utils.data_loading import MMFitDataLoading
 
 
 # 1. LOAD AND PREPROCESS DATA
 
 # Load data
-data_path = Configuration.Constants.MMFIT_DATA_PATH  # * = path to MM-Fit dataset
-train_weeks = DataLoading.load_data(data_path, Configuration.Constants.TRAINING_WEEK_IDS)
-val_weeks = DataLoading.load_data(data_path, Configuration.Constants.VALIDATION_WEEK_IDS)
+data_path = Configuration.Constants.MMFIT_DATA_PATH
+train_weeks = MMFitDataLoading.load_data(data_path, Configuration.Constants.TRAINING_WEEK_IDS)
+val_weeks = MMFitDataLoading.load_data(data_path, Configuration.Constants.VALIDATION_WEEK_IDS)
 
 # Standardize data
 train_weeks_scaled = Processing.standardize(train_weeks)

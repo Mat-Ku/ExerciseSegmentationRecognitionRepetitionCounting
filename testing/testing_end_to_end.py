@@ -10,7 +10,7 @@ from sklearn.decomposition import PCA
 from scipy.signal import savgol_filter
 
 from utils.assessment import Assessment
-from utils.data_loading import DataLoading
+from utils.data_loading import MMFitDataLoading
 from utils.processing import Processing
 from configuration import Configuration
 import matplotlib.pyplot as plt
@@ -30,7 +30,7 @@ cnn_2 = tf.keras.models.load_model(Configuration.Constants.EXERCISE_RECOGNITION_
 cnn_3 = tf.keras.models.load_model(Configuration.Constants.REPETITION_COUNTING_MODEL_PATH)
 
 # Extract accelerometer and gyroscope data of left smartwatch, as well as frames, week index, activity and exercise.
-test_weeks = DataLoading.load_data(mmfit_path, test_week_ids)
+test_weeks = MMFitDataLoading.load_data(mmfit_path, test_week_ids)
 
 # Standardize data
 train_mean = Configuration.Constants.TRAINING_DATA_MEAN

@@ -2,8 +2,8 @@ class Configuration:
 
     class Constants:
         # Paths
-        MMFIT_DATA_PATH = " "
-        RECOFIT_DATA_PATH = " "
+        MMFIT_DATA_PATH = "G:/2_studium/data_science/4th_term/master_thesis/python_code/data/mm-fit"
+        RECOFIT_DATA_PATH = "G:/2_studium/data_science/4th_term/master_thesis/python_code/data/recofit"
         SEGMENTATION_MODEL_PATH = "models/segmentation.h5"
         EXERCISE_RECOGNITION_MODEL_PATH = "models/exercise_recognition.h5"
         REPETITION_COUNTING_MODEL_PATH = "models/repetition_counting.h5"
@@ -11,8 +11,8 @@ class Configuration:
         # Week IDs
         ALL_WEEK_IDS = ['w00', 'w01', 'w02', 'w03', 'w04', 'w05', 'w06', 'w07', 'w08', 'w09', 'w10', 'w11', 'w12', 'w13', 'w14',
                         'w15', 'w16', 'w17', 'w18', 'w19', 'w20']
-        TRAINING_WEEK_IDS = ['w00', 'w01', 'w02', 'w03', 'w04', 'w05', 'w07', 'w09', 'w10', 'w11', 'w12', 'w13', 'w14', 'w15',
-                             'w18', 'w19', 'w20']
+        TRAINING_WEEK_IDS = ['w00', 'w01'] #'w02', 'w03', 'w04', 'w05', 'w07', 'w09', 'w10', 'w11', 'w12', 'w13', 'w14', 'w15',
+                             #'w18', 'w19', 'w20']
         VALIDATION_WEEK_IDS = ['w08', 'w16']
         TEST_WEEK_IDS = ['w06', 'w17']
 
