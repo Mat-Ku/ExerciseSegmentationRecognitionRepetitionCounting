@@ -3,7 +3,7 @@ class Configuration:
     class Constants:
         # Paths
         MMFIT_DATA_PATH = "G:/2_studium/data_science/4th_term/master_thesis/python_code/data/mm-fit"
-        RECOFIT_DATA_PATH = "G:/2_studium/data_science/4th_term/master_thesis/python_code/data/recofit"
+        RECOFIT_DATA_PATH = "G:/2_studium/data_science/4th_term/master_thesis/python_code/data/recofit/exercise_data.50.0000_singleonly.mat"
         SEGMENTATION_MODEL_PATH = "models/segmentation.h5"
         EXERCISE_RECOGNITION_MODEL_PATH = "models/exercise_recognition.h5"
         REPETITION_COUNTING_MODEL_PATH = "models/repetition_counting.h5"

@@ -1,5 +1,4 @@
 from copy import deepcopy
-from scipy.io import loadmat
 from sklearn.preprocessing import StandardScaler
 from tensorflow import keras
 
@@ -25,12 +24,6 @@ recofit_path = Configuration.Constants.RECOFIT_DATA_PATH  # path to RecoFit data
 train_weeks = MMFitDataLoading.load_data(mmfit_path, Configuration.Constants.TRAINING_WEEK_IDS)
 val_weeks = MMFitDataLoading.load_data(mmfit_path, Configuration.Constants.VALIDATION_WEEK_IDS)
 
-
-
-# Load Recofit data
-# loading file 'exercise_data.50.0000_singleonly.mat' is sufficient
-recofit_data = loadmat(recofit_path + '/exercise_data.50.0000_singleonly.mat')
-
 # Retrieve MM-Fit exercise types
 train_weeks_dfs = []
 for ind in range(len(train_weeks)):
@@ -39,7 +32,7 @@ for ind in range(len(train_weeks)):
                                     train_weeks[ind][3])),
                       columns=['x_acc', 'y_acc', 'z_acc', 'x_gyr', 'y_gyr', 'z_gyr', 'exercise'])
     train_weeks_dfs.append(df)
-    
+
 val_weeks_dfs = []
 for ind in range(len(val_weeks)):
     df = pd.DataFrame(data=list(zip(val_weeks[ind][0][:, 0], val_weeks[ind][0][:, 1], val_weeks[ind][0][:, 2],
@@ -63,7 +56,7 @@ train_data_mf = deepcopy([seg[::2] for seg in train_data_mf])  # downsample trai
 val_data_mf = []
 for workout in val_weeks_dfs:
     group = workout['exercise'].ne(workout['exercise'].shift()).cumsum()
-    segments = [g for _,g in workout.groupby(group)]
+    segments = [g for _, g in workout.groupby(group)]
     val_data_mf.append(segments)
 val_data_mf = [item for sublist in val_data_mf for item in sublist]  # flatten list of lists
 val_data_mf = [seg for seg in val_data_mf if seg['exercise'].all() != 'none']  # eliminate 'rest' segments
@@ -71,54 +64,21 @@ val_data_mf = [np.asarray(seg)[:, :6] for seg in val_data_mf]  # delete exercise
 val_data_mf = deepcopy([seg[::2] for seg in val_data_mf])  # downsample validation segments to 50 Hz
 
 # Retrieve Recofit exercise segments
-# Recofit dataset contains more than 70 exercise types. Only those matching with  MM-Fit exercises are considered.
-target_ex = Configuration.Constants.RECOFIT_TARGET_EXERCISES
-
-# Retrieve accelerometer and gyroscope data, repetition count labels and exercise names
-# Nested loop runs through all participants/subjects (= outer loop) and their performed exercises (= inner loop).
-# If an exercise is contained in the list 'target_ex', its subject ID, exercise index, exercise name, accelerometer data
-# and gyroscope data will be appended to target_ex_data.
-target_ex_data = []
-subject_id = -1
-
-for subject in recofit_data['subject_data']:  
-    subject_id += 1  # assign an ID to each subject
-    
-    for i in range(len(subject)): 
-        ex_ind = i  # get index of exercise within all exercises performed by subject
-        
-        try:
-            ex_name = subject[i][0, 0][5][0]  # retrieve exercise name
-            if ex_name in target_ex:
-                reps = subject[i][0, 0][15][0, 0]  # retrieve count of repetitions performed by subject in this exercise
-                ex_acc = subject[i][0, 0][14][0, 0][0]  # retrieve accelerometer data of respective exercise
-                ex_gyr = subject[i][0, 0][14][0, 0][1]  # retrieve gyroscope data of respective exercise
-                target_ex_data.append([subject_id, ex_ind, ex_name, reps, ex_acc, ex_gyr])
-            else:  # if exercise is not a target exercise, continue and check if the next is a target exercise
-                continue
-        # prevent code from crashing if subject data has index lengths that are incompatible
-        except IndexError:
-            continue        
-target_ex_data = np.array(target_ex_data)
+recofit_data = RecoFitDataLoading.load_data(data_path=recofit_path,
+                                            exercise_types=Configuration.Constants.RECOFIT_TARGET_EXERCISES)
 
 # Filter out exercise sets with erroneous repetition counts
 # e.g. 0 repetitions or negative repetition counts
-target_ex_data_clean = [item for item in target_ex_data if item[3] > 0]
+recofit_data = [item for item in recofit_data if item[1] > 0]
 
 # Divide features from labels
-data_rf = []  # stores acc+gyr data of exercise segments
-labels_rf = []  # stores corresponding repetition counts
-for seg in target_ex_data_clean:
-    # join accelerometer and gyroscope data in one array and store them
-    data_rf.append(np.concatenate((seg[4][:, 1:], seg[5][:, 1:]), axis = 1))
-    # retrieve repetition count
-    labels_rf.append(seg[3])
-    
+data_rf = [item[0] for item in recofit_data]  # stores acc+gyr data of exercise segments
+labels_rf = [item[1] for item in recofit_data]  # stores corresponding repetition counts
 
 # Delete unsuitable instances
 
 # Delete samples with repetition counts larger than 29
-# Reason: High repetition counts are unrealistic compared to repetition counts of MM-Fit data. Not filtering them out 
+# Reason: High repetition counts are unrealistic compared to repetition counts of MM-Fit data. Not filtering them out
 # can cause test data to perform badly on CNN, since behaviour of CNN might be skewed towards predicting high counts.
 del_inds_30 = list(np.where(np.asarray(labels_rf) >= 30)[0])
 data_rf = [data_rf[i] for i in range(len(data_rf)) if i not in del_inds_30]
@@ -131,32 +91,32 @@ del_inds_4000 = [i for i in range(len(data_rf)) if len(data_rf[i]) > 4000]
 data_rf = [data_rf[i] for i in range(len(data_rf)) if i not in del_inds_4000]
 labels_rf = [labels_rf[i] for i in range(len(labels_rf)) if i not in del_inds_4000]
 
-# Delete samples which show misleading signal according to visual inspection. 
+# Delete samples which show misleading signal according to visual inspection.
 # Reason: They might hinder the CNN from predicting amount of peaks correctly.
 # Remark: In order to create 'del_list', all time series contained in 'data_rf' were printed and visually inspected with
 # respect to whether their signal is interpretable for the human eye. The indices of the time series that did not
 # pass this visual test were stored in 'del_list' and are deleted from the data.
-del_list = [0, 41, 42, 86, 87, 105, 118, 122, 139, 144, 155, 163, 170, 172, 182, 195, 206, 225, 253, 263, 291, 299, 310, 
-           315, 319, 323, 336, 337, 338, 341, 344, 357, 365, 378, 388, 401, 432, 437, 438, 443, 453, 454, 455, 465, 475, 
+del_list = [0, 41, 42, 86, 87, 105, 118, 122, 139, 144, 155, 163, 170, 172, 182, 195, 206, 225, 253, 263, 291, 299, 310,
+           315, 319, 323, 336, 337, 338, 341, 344, 357, 365, 378, 388, 401, 432, 437, 438, 443, 453, 454, 455, 465, 475,
            478, 498, 501, 506, 530, 536, 542, 544, 574, 582, 601, 618, 652, 668, 719]
 data_rf = [data_rf[i] for i in range(len(data_rf)) if i not in del_list]
 labels_rf = [labels_rf[i] for i in range(len(labels_rf)) if i not in del_list]
 
-# Reduce the number of exercise sets whose repetition count is 20 
+# Reduce the number of exercise sets whose repetition count is 20
 # Reason: Exercises with repetition counts of 20 are overrepresented in the dataset and CNN might overfit on them
 # Get indices of all repetition counts == 20
 del_inds_20 = [i for i in range(len(labels_rf)) if labels_rf[i] == 20]
-# Select all indices, except the last 20. 
+# Select all indices, except the last 20.
 # This assures that the reduced dataset still contains 20 samples with 20 repetitions each.
 del_inds_20 = del_inds_20[:-20]
 data_rf = [data_rf[i] for i in range(len(data_rf)) if i not in del_inds_20]
 labels_rf = [labels_rf[i] for i in range(len(labels_rf)) if i not in del_inds_20]
 
-# Reduce the number of exercise sets whose repetition count is 15 
+# Reduce the number of exercise sets whose repetition count is 15
 # Reason: Exercises with repetition counts of 15 are overrepresented in the dataset and CNN might overfit on them
 # Get indices of all repetition counts == 15
 del_inds_15 = [i for i in range(len(labels_rf)) if labels_rf[i] == 15]
-# Select all indices, except the last 20 
+# Select all indices, except the last 20
 del_inds_15 = del_inds_15[:-20]
 data_rf = [data_rf[i] for i in range(len(data_rf)) if i not in del_inds_15]
 labels_rf = [labels_rf[i] for i in range(len(labels_rf)) if i not in del_inds_15]
@@ -248,7 +208,7 @@ X_val = X_val_mf + X_val_rf
 y_train = train_labels_mf + train_labels_rf
 y_val = val_labels_mf + val_labels_rf
 
-# Padding 
+# Padding
 X_train = Processing.padding(data=X_train, window_size=30000)
 X_val = Processing.padding(data=X_val, window_size=30000)
 
